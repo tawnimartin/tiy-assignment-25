@@ -37,9 +37,9 @@ var searchResults = function(keywords) {
 	console.log("a search was made:", keywords);
 }
 
-var test = React.render(<SearchBar onSearchSubmit={searchResults}/>, document.body);
+var test = React.render(<SearchBar onSearchSubmit={this.searchResults}/>, document.body);
 
-});
+
 
 
 
@@ -71,7 +71,7 @@ var test = React.render(<SearchBar onSearchSubmit={searchResults}/>, document.bo
 
 // <SearchBox />
 
-
+});
 
 
 
