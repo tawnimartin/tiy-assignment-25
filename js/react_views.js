@@ -1,38 +1,83 @@
 $(function(){
 
-	var SearchBar = React.createClass({displayName: "SearchBar",
-		
-		render: function() {
-			return (
-				React.createElement("div", null, React.createElement("input", {type: "text", name: "keyword", id: "keyword", value: this.props.keyword}), 
-				React.createElement("input", {type: "submit", value: "Submit", onClick: this.props.onChange}))
-				);
-		}
+var SearchBar = React.createClass({displayName: "SearchBar",
 
+		getInitialState: function(){
+			return {keywords: ""}
+		},
+
+		updateKeywords: function(e) {
+			var userKeywords = e.target.value;
+			this.setState({keywords: userKeywords});
+		},
+
+		onSubmitFunc: function(e) {
+			e.preventDefault();
+			var myUserKeywords = this.state.keywords;
+			console.log(myUserKeywords);
+			this.onSearchSubmit(myUserKeywords);
+		},
+
+		onSearchSubmit: function() {
+
+		},
+
+		render: function(){
+			return (
+				React.createElement("form", {onSubmit: this.onSubmitFunc}, 
+					React.createElement("input", {
+					type: "text", 
+					name: "search", 
+					onChange: this.updateKeywords, 
+					value: this.state.keywords}), 
+					React.createElement("button", null, "Search")
+				)
+			)
+		}
+	});
+
+var searchResults = function(keywords) {
+	console.log("a search was made:", keywords);
+}
+
+// React.render(<SearchBar onSearchSubmit={searchResults}/>, document.body);
 });
+
+React.createElement(SearchBar, {onSearchSubmit: searchResults})
+
+//--------
 
 var SearchBox = React.createClass({displayName: "SearchBox",
 
-	render: function() {
+	getInitialState: function() {
+		return {searchTerm: ""}
+	},
+
+	updateTerms: function(keywords) {
+		this.updateState({searchTerm: keywords});
+	},
+
+	render: function(){
 		return (
-			React.createElement("div", {className: "search-class"}, 
-			React.createElement("div", null, "Search Keyword: ", this.props.keyword), 
-			React.createElement(SearchBar, {onChange: this.props.onChange})
+			React.createElement("div", null, 
+			React.createElement("label", null, "Keywords: ", this.state.searchTerm), 
+			React.createElement(SearchBar, {onSearchSubmit: this.updateTerms})
 			)
 		);
 	}
 
 });
 
-var onChange = function(e) {
-	var value = document.getElementById('keyword').value
-	//console.log("keyword", value);
-	test.setProps({keyword: value});
-}
+React.createElement(SearchBox, null)
 
-var test = React.render(React.createElement(SearchBox, {onChange: onChange}), document.body);
 
-});
+
+
+
+
+
+
+
 
 
 

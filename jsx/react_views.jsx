@@ -1,38 +1,83 @@
 $(function(){
 
-	var SearchBar = React.createClass({
-		
-		render: function() {
-			return (
-				<div><input type="text" name="keyword" id="keyword" value={this.props.keyword} />
-				<input type="submit" value="Submit" onClick={this.props.onChange} /></div>
-				);
-		}
+var SearchBar = React.createClass({
 
+		getInitialState: function(){
+			return {keywords: ""}
+		},
+
+		updateKeywords: function(e) {
+			var userKeywords = e.target.value;
+			this.setState({keywords: userKeywords});
+		},
+
+		onSubmitFunc: function(e) {
+			e.preventDefault();
+			var myUserKeywords = this.state.keywords;
+			console.log(myUserKeywords);
+			this.onSearchSubmit(myUserKeywords);
+		},
+
+		onSearchSubmit: function() {
+
+		},
+
+		render: function(){
+			return (
+				<form onSubmit={this.onSubmitFunc}>
+					<input 
+					type="text" 
+					name="search"
+					onChange={this.updateKeywords} 
+					value={this.state.keywords} />
+					<button>Search</button>
+				</form>
+			)
+		}
+	});
+
+var searchResults = function(keywords) {
+	console.log("a search was made:", keywords);
+}
+
+// React.render(<SearchBar onSearchSubmit={searchResults}/>, document.body);
 });
+
+<SearchBar onSearchSubmit={searchResults}/>
+
+//--------
 
 var SearchBox = React.createClass({
 
-	render: function() {
+	getInitialState: function() {
+		return {searchTerm: ""}
+	},
+
+	updateTerms: function(keywords) {
+		this.updateState({searchTerm: keywords});
+	},
+
+	render: function(){
 		return (
-			<div className="search-class">
-			<div>Search Keyword: {this.props.keyword}</div>
-			<SearchBar onChange={this.props.onChange} />
+			<div>
+			<label>Keywords: {this.state.searchTerm}</label>
+			<SearchBar onSearchSubmit={this.updateTerms} />
 			</div>
 		);
 	}
 
 });
 
-var onChange = function(e) {
-	var value = document.getElementById('keyword').value
-	//console.log("keyword", value);
-	test.setProps({keyword: value});
-}
+<SearchBox />
 
-var test = React.render(<SearchBox onChange={onChange} />, document.body);
 
-});
+
+
+
+
+
+
+
 
 
 
