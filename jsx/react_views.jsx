@@ -1,3 +1,4 @@
+
 $(function(){
 
 var SearchBar = React.createClass({
@@ -18,10 +19,6 @@ var SearchBar = React.createClass({
 			this.onSearchSubmit(myUserKeywords);
 		},
 
-		onSearchSubmit: function() {
-
-		},
-
 		render: function(){
 			return (
 				<form onSubmit={this.onSubmitFunc}>
@@ -34,41 +31,46 @@ var SearchBar = React.createClass({
 				</form>
 			)
 		}
-	});
+});
 
 var searchResults = function(keywords) {
 	console.log("a search was made:", keywords);
 }
 
-// React.render(<SearchBar onSearchSubmit={searchResults}/>, document.body);
-});
-
-<SearchBar onSearchSubmit={searchResults}/>
-
-//--------
-
-var SearchBox = React.createClass({
-
-	getInitialState: function() {
-		return {searchTerm: ""}
-	},
-
-	updateTerms: function(keywords) {
-		this.updateState({searchTerm: keywords});
-	},
-
-	render: function(){
-		return (
-			<div>
-			<label>Keywords: {this.state.searchTerm}</label>
-			<SearchBar onSearchSubmit={this.updateTerms} />
-			</div>
-		);
-	}
+var test = React.render(<SearchBar onSearchSubmit={searchResults}/>, document.body);
 
 });
 
-<SearchBox />
+
+
+
+// <SearchBar onSearchSubmit={searchResults}/>
+
+// //--------
+
+// var SearchBox = React.createClass({
+
+// 	getInitialState: function() {
+// 		return {searchTerm: ""}
+// 	},
+
+// 	updateTerms: function(keywords) {
+// 		this.updateState({searchTerm: keywords});
+// 	},
+
+// 	render: function(){
+// 		return (
+// 			<div>
+// 			<label>Keywords: {this.state.searchTerm}</label>
+// 			<SearchBar onSearchSubmit={this.updateTerms} />
+// 			</div>
+// 		);
+// 	}
+
+// });
+
+// <SearchBox />
+
 
 
 
